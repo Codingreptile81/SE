@@ -145,34 +145,33 @@ pipeline {
 
     tools {
         jdk 'JAVA_HOME'
-        maven 'maven'
+        maven 'MAVEN_HOME'
     }
 
     stages {
-
         stage('git repo & clean') {
             steps {
-                bat "rmdir /s /q 23BD1A051X_se_java || exit 0"
-                bat "git clone https://github.com/SarvikaSomishetty/23BD1A051X_se_java.git"
-                bat "mvn clean -f 23BD1A051X_se_java/pom.xml"
+                bat "rmdir /s /q firstmaven || exit 0"
+                bat "git clone https://github.com/deborah0888/firstmaven.git"
+                bat "mvn clean -f firstmaven/pom.xml"
             }
         }
 
         stage('install') {
             steps {
-                bat "mvn install -f 23BD1A051X_se_java/pom.xml"
+                bat "mvn install -f firstmaven/pom.xml"
             }
         }
 
         stage('test') {
             steps {
-                bat "mvn test -f 23BD1A051X_se_java/pom.xml"
+                bat "mvn test -f firstmaven/pom.xml"
             }
         }
 
         stage('package') {
             steps {
-                bat "mvn package -f 23BD1A051X_se_java/pom.xml"
+                bat 'mvn package -f firstmaven/pom.xml'
             }
         }
     }
